@@ -8,15 +8,16 @@ import stream = require('stream');
 type TransformCallback = (err?: any, data?: any) => void;
 type TransformFunction = (chunk: any, encoding: string, callback: TransformCallback) => void;
 type FlushCallback = (flushCallback: () => void) => void;
-
 declare function through2(transform?: TransformFunction, flush?: FlushCallback): NodeJS.ReadWriteStream;
 
-declare function through2(options?: stream.DuplexOptions, transform?: TransformFunction, flush?: FlushCallback): NodeJS.ReadWriteStream;
+declare function through2(options?: stream.DuplexOptions, transformFunction?: TransformFunction, flushFunction?: FlushCallback): NodeJS.ReadWriteStream;
 
 declare namespace through2 {
-  export function obj(transform?: TransformFunction, flush?: FlushCallback): NodeJS.ReadWriteStream;
+  export function obj(transformFunction?: TransformFunction, flushFunction?: FlushCallback): NodeJS.ReadWriteStream;
 
-  export function push(data: any): void;
+  // push() is not on through2, it's on `this` in the callback.
+  // Don't have a way to type this yet.
+  // export function push(data: any): void;
 }
 
 export = through2;
