@@ -5,16 +5,16 @@
 
 import stream = require('stream');
 
-type TransfofmCallback = (err?: any, data?: any) => void;
-type TransformFunction = (chunk: any, enc: string, callback: TransfofmCallback) => void;
-type FlashCallback = (flushCallback: () => void) => void;
+type TransformCallback = (err?: any, data?: any) => void;
+type TransformFunction = (chunk: any, encoding: string, callback: TransformCallback) => void;
+type FlushCallback = (flushCallback: () => void) => void;
 
-declare function through2(transform?: TransformFunction, flush?: FlashCallback): NodeJS.ReadWriteStream;
+declare function through2(transform?: TransformFunction, flush?: FlushCallback): NodeJS.ReadWriteStream;
 
-declare function through2(opts?: stream.DuplexOptions, transform?: TransformFunction, flush?: FlashCallback): NodeJS.ReadWriteStream;
+declare function through2(options?: stream.DuplexOptions, transform?: TransformFunction, flush?: FlushCallback): NodeJS.ReadWriteStream;
 
 declare namespace through2 {
-  export function obj(transform?: TransformFunction, flush?: FlashCallback): NodeJS.ReadWriteStream;
+  export function obj(transform?: TransformFunction, flush?: FlushCallback): NodeJS.ReadWriteStream;
 
   export function push(data: any): void;
 }
