@@ -2,7 +2,7 @@
 
 import through2 = require('through2');
 
-var rws: NodeJS.ReadWriteStream;
+let rws: NodeJS.ReadWriteStream;
 
 rws = through2(
   {
@@ -38,6 +38,21 @@ rws = through2(function(entry: any, enc: string, callback: () => void) {
 });
 
 rws = through2();
+
+// ctor
+rws = through2.ctor(
+  {
+    objectMode: true,
+    allowHalfOpen: true
+  },
+  function(entry: any, enc: string, callback: () => void) {
+    this.push('foo');
+    callback();
+  },
+  () => {
+  });
+
+
 
 // obj
 rws = through2.obj(
