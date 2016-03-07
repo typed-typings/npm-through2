@@ -1,10 +1,66 @@
 /// <reference path="../bundle.d.ts" />
 
-import * as through2 from 'through2';
+import through2 = require('through2');
 
-let result: NodeJS.ReadWriteStream = through2({}, function() { }, (function() { }));
+var rws: NodeJS.ReadWriteStream;
 
-result = through2.ctor({}, function() { }, (function() { }));
-result = through2.obj(function() { }, (function() { }));
+rws = through2(
+  {
+    objectMode: true,
+    allowHalfOpen: true
+  },
+  function(entry: any, enc: string, callback: () => void) {
+    this.push('foo');
+    callback();
+  },
+  () => {
+  });
+
+rws = through2(
+  function(entry: any, enc: string, callback: () => void) {
+    this.push('foo');
+    callback();
+  },
+  () => {
+  });
+
+rws = through2(
+  function(entry: any, enc: string, callback: (error: any, data?: any) => void) {
+    callback(null, 'foo');
+  },
+  (flushCallback: () => void) => {
+    flushCallback();
+  });
+
+rws = through2(function(entry: any, enc: string, callback: () => void) {
+  this.push('foo');
+  callback();
+});
+
+rws = through2();
+
+// obj
+rws = through2.obj(
+  function(entry: any, enc: string, callback: () => void) {
+    this.push('foo');
+    callback();
+  },
+  () => {
+
+  });
+
+rws = through2.obj(
+  function(entry: any, enc: string, callback: () => void) {
+    this.push('foo');
+    callback();
+  });
+
+rws = through2.obj(
+  function(entry: any, enc: string, callback: (err: any) => void) {
+    callback('Oups!');
+  },
+  (flashCallback) => {
+    flashCallback();
+  });
 
 console.log('DONE');
