@@ -16,9 +16,12 @@ declare namespace through2 {
   export function ctor(options?: stream.DuplexOptions, transformFunction?: TransformFunction, flushFunction?: FlushCallback): NodeJS.ReadWriteStream;
   export function obj(transformFunction?: TransformFunction, flushFunction?: FlushCallback): NodeJS.ReadWriteStream;
 
-  // push() is not on through2, it's on `this` in the callback.
-  // Don't have a way to type this yet.
-  // export function push(data: any): void;
+  /**
+   * Type of `this` inside TransformFunction and FlushCallback.
+   */
+  export interface This {
+    push(data: any): void;
+  }
 }
 
 export = through2;

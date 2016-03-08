@@ -10,7 +10,7 @@ rws = through2(
     allowHalfOpen: true
   },
   function(entry: any, enc: string, callback: () => void) {
-    this.push('foo');
+    (<through2.This>this).push('foo');
     callback();
   },
   () => {
@@ -18,7 +18,7 @@ rws = through2(
 
 rws = through2(
   function(entry: any, enc: string, callback: () => void) {
-    this.push('foo');
+    (<through2.This>this).push('foo');
     callback();
   },
   () => {
@@ -33,7 +33,7 @@ rws = through2(
   });
 
 rws = through2(function(entry: any, enc: string, callback: () => void) {
-  this.push('foo');
+  (<through2.This>this).push('foo');
   callback();
 });
 
@@ -46,7 +46,7 @@ rws = through2.ctor(
     allowHalfOpen: true
   },
   function(entry: any, enc: string, callback: () => void) {
-    this.push('foo');
+    (<through2.This>this).push('foo');
     callback();
   },
   () => {
@@ -57,7 +57,7 @@ rws = through2.ctor(
 // obj
 rws = through2.obj(
   function(entry: any, enc: string, callback: () => void) {
-    this.push('foo');
+    (<through2.This>this).push('foo');
     callback();
   },
   () => {
@@ -66,7 +66,7 @@ rws = through2.obj(
 
 rws = through2.obj(
   function(entry: any, enc: string, callback: () => void) {
-    this.push('foo');
+    (<through2.This>this).push('foo');
     callback();
   });
 
