@@ -52,8 +52,6 @@ rws = through2.ctor(
   () => {
   });
 
-
-
 // obj
 rws = through2.obj(
   function(entry: any, enc: string, callback: () => void) {
